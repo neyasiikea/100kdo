@@ -46,7 +46,7 @@ export function generateClipboardText(toolkit: Toolkit): string {
 
   // Footer
   lines.push('---');
-  lines.push(`工具包来源：100kdo.com/toolkits/${toolkit.slug}`);
+  lines.push(`工具包来源：100kdo.ccwu.cc/toolkits/${toolkit.slug}`);
   lines.push(`更新日期：${toolkit.updated}`);
 
   return lines.join('\n');

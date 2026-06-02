@@ -71,7 +71,7 @@ function generateClipboardText(
 
   // Footer
   lines.push('---');
-  lines.push('由 AI 生成 · 100kdo.com · 仅供参考');
+  lines.push('由 AI 生成 · 100kdo.ccwu.cc · 仅供参考');
 
   return lines.join('\n');
 }

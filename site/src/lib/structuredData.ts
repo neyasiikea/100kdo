@@ -14,13 +14,13 @@ export function generateToolkitJsonLd(toolkit: Toolkit): object {
     description: toolkit.description,
     applicationCategory: 'AIApplication',
     operatingSystem: 'Web',
-    url: `https://100kdo.com/toolkits/${toolkit.slug}`,
+    url: `https://100kdo.ccwu.cc/toolkits/${toolkit.slug}`,
     dateModified: toolkit.updated,
     keywords: toolkit.keywords?.join(', '),
     author: {
       '@type': 'Organization',
       name: '100kdo',
-      url: 'https://100kdo.com',
+      url: 'https://100kdo.ccwu.cc',
     },
     hasPart: toolkit.scenarios?.map((s) => ({
       '@type': 'HowTo',

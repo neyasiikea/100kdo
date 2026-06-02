@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://100kdo.com/sitemap.xml',
+    sitemap: 'https://100kdo.ccwu.cc/sitemap.xml',
   };
 }

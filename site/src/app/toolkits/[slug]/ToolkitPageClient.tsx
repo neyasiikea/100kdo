@@ -158,7 +158,7 @@ export default function ToolkitPageClient({ slug }: Props) {
         <div className={styles.share}>
           <span className={styles.shareLabel}>分享：</span>
           <CopyButton
-            text={`https://100kdo.com/toolkits/${toolkit.slug}`}
+            text={`https://100kdo.ccwu.cc/toolkits/${toolkit.slug}`}
             label="📎 复制链接"
           />
         </div>

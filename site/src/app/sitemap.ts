@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getAllToolkitSlugs } from '@/lib/toolkit';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://100kdo.com';
+  const baseUrl = 'https://100kdo.ccwu.cc';
   const slugs = await getAllToolkitSlugs();
   return [
     {

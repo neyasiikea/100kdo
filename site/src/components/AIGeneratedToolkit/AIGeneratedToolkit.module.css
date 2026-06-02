@@ -1,0 +1,244 @@
+.container {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+/* AI Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: rgba(210, 153, 34, 0.12);
+  color: var(--color-warning);
+  border-bottom: 1px solid rgba(210, 153, 34, 0.2);
+  width: 100%;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1.25rem 1.25rem 0.75rem;
+}
+
+.icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.headerContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Keywords */
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0 1.25rem 1rem;
+}
+
+.keyword {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--color-surface-raised);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+/* Prompt Section */
+.promptSection {
+  border-top: 1px solid var(--color-border);
+}
+
+.promptHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background: var(--color-surface-raised);
+}
+
+.promptTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.promptActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggle {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s;
+}
+
+.toggle:hover {
+  color: var(--color-text-primary);
+}
+
+.prompt {
+  margin: 0;
+  padding: 1rem;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  transition: max-height 0.3s ease;
+}
+
+.prompt code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Section Titles */
+.sectionTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  padding: 0 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Ports */
+.portList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 1.25rem 1rem;
+}
+
+.port {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-raised);
+}
+
+.portHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.portStatus {
+  font-size: 0.68rem;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.statusVerified {
+  background: rgba(63, 185, 80, 0.12);
+  color: var(--color-success);
+}
+
+.statusUnverified {
+  background: rgba(210, 153, 34, 0.12);
+  color: var(--color-warning);
+}
+
+.statusCommunity {
+  background: rgba(110, 118, 129, 0.12);
+  color: var(--color-text-secondary);
+}
+
+.portConnector {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.portBody {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.portName {
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+}
+
+.portType {
+  font-size: 0.65rem;
+  padding: 0.1em 0.4em;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+}
+
+.portFooter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.portPlatform {
+  font-size: 0.65rem;
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+}
+
+.portUrl {
+  font-size: 0.68rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 240px;
+}
+
+.portUrl:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* Scenarios wrapper */
+.scenarios {
+  padding: 0 1.25rem 1.25rem;
+}

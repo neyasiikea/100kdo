@@ -1,0 +1,31 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-accent);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.button:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.copied {
+  background: var(--color-success);
+  color: #fff;
+  border-color: var(--color-success);
+}
+
+.copied:hover {
+  background: var(--color-success);
+  color: #fff;
+}

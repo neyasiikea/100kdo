@@ -1,0 +1,129 @@
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.breadcrumb a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-accent);
+}
+
+.sep {
+  color: var(--color-border);
+}
+
+.current {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Delivery box */
+.deliveryBox {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.deliveryTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.copyBtn {
+  font-size: 1rem;
+  padding: 0.7rem 1.8rem;
+}
+
+.deliveryHint {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Stats bar */
+.statsBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* Share */
+.share {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 0;
+}
+
+.shareLabel {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}

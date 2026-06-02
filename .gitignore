@@ -1,0 +1,10 @@
+node_modules/
+.next/
+out/
+.wrangler/
+dist/
+.vercel/
+.superpowers/
+.claude/
+*.sql
+data-check.json

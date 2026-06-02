@@ -6,11 +6,12 @@ interface ScenarioListProps {
 }
 
 export default function ScenarioList({ scenarios }: ScenarioListProps) {
-  if (scenarios.length === 0) return null;
+  const list = scenarios ?? [];
+  if (list.length === 0) return null;
 
   return (
     <div className={styles.list}>
-      {scenarios.map((scenario) => (
+      {list.map((scenario) => (
         <span key={scenario.name} className={styles.pill}>
           <span className={styles.icon}>{scenario.icon}</span>
           <span className={styles.name}>{scenario.name}</span>

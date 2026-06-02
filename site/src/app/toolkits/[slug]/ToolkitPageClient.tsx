@@ -63,13 +63,15 @@ export default function ToolkitPageClient({ slug }: Props) {
   const subcategory = toolkit.subcategory
     ? getCategoryBySlug(toolkit.subcategory)
     : undefined;
+  const ports = Array.isArray(toolkit.ports) ? toolkit.ports : [];
+  const scenarios = Array.isArray(toolkit.scenarios) ? toolkit.scenarios : [];
   const clipboardText = generateClipboardText(toolkit);
 
-  const verifiedCount = toolkit.ports.filter(
-    (p) => p.status === 'verified'
+  const verifiedCount = ports.filter(
+    (p) => p?.status === 'verified'
   ).length;
   const uniquePlatforms = new Set(
-    toolkit.ports.flatMap((p) => p.platforms)
+    ports.flatMap((p) => p?.platforms ?? [])
   ).size;
 
   return (
@@ -134,22 +136,22 @@ export default function ToolkitPageClient({ slug }: Props) {
         {/* Port connectors */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>🔌 权威数据端口</h2>
-          <PortConnectorList ports={toolkit.ports} />
+          <PortConnectorList ports={ports} />
         </section>
 
         {/* Scenarios */}
-        {toolkit.scenarios.length > 0 && (
+        {scenarios.length > 0 && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>📋 适用场景</h2>
-            <ScenarioList scenarios={toolkit.scenarios} />
+            <ScenarioList scenarios={scenarios} />
           </section>
         )}
 
         {/* Stats bar */}
         <div className={styles.statsBar}>
-          <span>📅 更新于 {toolkit.updated}</span>
+          <span>📅 更新于 {(toolkit.updated || toolkit.created_at || '').slice(0, 10) || '—'}</span>
           <span>
-            ✅ {verifiedCount}/{toolkit.ports.length} 已验证端口
+            ✅ {verifiedCount}/{ports.length} 已验证端口
           </span>
           <span>🖥️ {uniquePlatforms} 个平台</span>
         </div>

@@ -41,7 +41,8 @@ export interface Toolkit {
   subcategory?: string;
   description: string;
   keywords: string[];
-  updated: string;         // ISO date string
+  updated?: string;         // ISO date string (curated toolkits)
+  created_at?: string;       // datetime string (AI-generated toolkits via API)
   prompt: string;          // Full expert prompt text
   scenarios: Scenario[];
   ports: PortConnector[];

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import CopyButton from '@/components/CopyButton';
+import PlatformButtons from '@/components/PlatformButtons';
 import ScenarioList from '@/components/ScenarioList';
 import type { PortConnector, Scenario } from '@/types';
 import styles from './AIGeneratedToolkit.module.css';
@@ -96,15 +97,25 @@ export default function AIGeneratedToolkit({
       </div>
 
       {/* Keywords */}
-      {toolkit.keywords.length > 0 && (
+      {Array.isArray(toolkit.keywords) && toolkit.keywords.length > 0 && (
         <div className={styles.keywords}>
-          {toolkit.keywords.map((kw) => (
+          {(toolkit.keywords).map((kw) => (
             <span key={kw} className={styles.keyword}>
               {kw}
             </span>
           ))}
         </div>
       )}
+
+      {/* Delivery — Copy + Platform buttons */}
+      <div className={styles.delivery}>
+        <CopyButton
+          text={generateClipboardText(toolkit)}
+          label="📋 复制完整工具包"
+        />
+        <p className={styles.deliveryHint}>复制后粘贴到任意 AI 对话中即可使用</p>
+        <PlatformButtons promptText={toolkit.prompt} />
+      </div>
 
       {/* Prompt Preview */}
       <div className={styles.promptSection}>

@@ -20,10 +20,18 @@ function searchToolkits(query: string, toolkits: ToolkitMeta[]): ToolkitMeta[] {
       if (safeLower(tk.title).includes(q)) score += 10;
       if (safeLower(tk.title) === q) score += 20;
       if (safeLower(tk.description).includes(q)) score += 5;
-      const kwMatches = (tk.keywords ?? []).filter((kw) => safeLower(kw).includes(q)).length;
-      score += kwMatches * 8;
+
+      // Keyword match (both directions) — guard against non-array keywords
+      const raw = tk.keywords ?? [];
+      const kws = Array.isArray(raw) ? raw.map((k) => safeLower(k)) : [];
+      // A. keyword contains query substring (e.g. kw="发烧护理" matches q="发烧")
+      score += kws.filter((kw) => kw.includes(q)).length * 8;
+      // B. query contains keyword (e.g. q="孩子发烧怎么办" matches kw="发烧")
+      score += kws.filter((kw) => kw.length >= 2 && q.includes(kw)).length * 12;
+
       if (safeLower(tk.category).includes(q)) score += 3;
       if (tk.subcategory && safeLower(tk.subcategory).includes(q)) score += 3;
+
       return { toolkit: tk, score };
     })
     .filter((r) => r.score > 0)
@@ -138,29 +146,35 @@ export default function SearchResults({ allToolkits: initialToolkits }: SearchRe
               </a>
             ))}
           </div>
+        </div>
+      )}
 
-          {/* AI Generation prompt */}
-          <div className={styles.aiSection}>
-            <p className={styles.aiHint}>或者让 AI 为你生成一个工具包</p>
-            <button
-              type="button"
-              className={styles.generateButton}
-              onClick={handleGenerate}
-              disabled={generating}
-            >
-              {generating ? (
-                <span className={styles.generatingLabel}>
-                  <span className={styles.spinner} />
-                  生成中...
-                </span>
-              ) : (
-                '🤖 AI 为你生成'
-              )}
-            </button>
-            {generateError && (
-              <p className={styles.generateError}>{generateError}</p>
+      {/* AI Generation — always show when there's a query and no generation yet */}
+      {query && !generatedToolkit && (
+        <div className={styles.aiSection}>
+          <p className={styles.aiHint}>
+            {results.length > 0
+              ? '已有相关工具包，AI 也可为你生成更精准的版本'
+              : '或者让 AI 为你生成一个工具包'}
+          </p>
+          <button
+            type="button"
+            className={styles.generateButton}
+            onClick={handleGenerate}
+            disabled={generating}
+          >
+            {generating ? (
+              <span className={styles.generatingLabel}>
+                <span className={styles.spinner} />
+                生成中...
+              </span>
+            ) : (
+              '🤖 AI 为你生成'
             )}
-          </div>
+          </button>
+          {generateError && (
+            <p className={styles.generateError}>{generateError}</p>
+          )}
         </div>
       )}
 

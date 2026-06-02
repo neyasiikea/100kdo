@@ -23,10 +23,11 @@ export function generateClipboardText(toolkit: Toolkit): string {
   lines.push('');
 
   // Port connectors reference (L3)
-  if (toolkit.ports.length > 0) {
+  const safePorts = toolkit.ports ?? [];
+  if (safePorts.length > 0) {
     lines.push('---');
     lines.push('可使用的权威数据源（如已配置对应连接器）：');
-    for (const port of toolkit.ports) {
+    for (const port of safePorts) {
       lines.push(
         `- ${port.connector}：${port.name} (${PORT_TYPE_LABELS[port.type] ?? port.type})`
       );
@@ -35,7 +36,8 @@ export function generateClipboardText(toolkit: Toolkit): string {
   }
 
   // Scenarios (L1)
-  if (toolkit.scenarios.length > 0) {
+  const safeScenarios = toolkit.scenarios ?? [];
+  if (safeScenarios.length > 0) {
     lines.push('---');
     lines.push('常见场景处理流程：');
     for (const scenario of toolkit.scenarios) {

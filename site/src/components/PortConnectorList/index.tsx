@@ -46,7 +46,7 @@ export default function PortConnectorList({ ports }: PortConnectorListProps) {
             </div>
             <div className={styles.footer}>
               <span className={styles.platformList}>
-                {port.platforms.map((p) => (
+                {(port.platforms ?? []).map((p) => (
                   <span key={p} className={styles.platformBadge}>
                     {p}
                   </span>

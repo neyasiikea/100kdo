@@ -1,0 +1,35 @@
+{
+  "name": "100kdo",
+  "description": "AI-powered expert toolkit platform covering 22 domains. One-click copy of expert prompts and authoritative data ports.",
+  "url": "https://100kdo.ccwu.cc",
+  "category": "ai-tools",
+  "capabilities": {
+    "tools": [
+      {
+        "name": "search_toolkits",
+        "description": "Search expert toolkits by keyword across 22 domains (health, legal, career, parenting, AI, etc.)"
+      },
+      {
+        "name": "get_toolkit",
+        "description": "Get a complete toolkit including expert prompt, authoritative data ports, and usage scenarios"
+      },
+      {
+        "name": "generate_toolkit",
+        "description": "AI generates a new domain-expert toolkit on demand and stores it for future use"
+      }
+    ]
+  },
+  "api": {
+    "base": "https://api.100kdo.ccwu.cc",
+    "mcp": "https://api.100kdo.ccwu.cc/mcp",
+    "spec": "https://api.100kdo.ccwu.cc/mcp"
+  },
+  "discovery": {
+    "llms": "https://100kdo.ccwu.cc/llms.txt",
+    "sitemap": "https://100kdo.ccwu.cc/sitemap.xml"
+  },
+  "contact": {
+    "github": "https://github.com/neyasiikea/100kdo"
+  },
+  "version": "0.1.2"
+}

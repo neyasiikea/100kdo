@@ -8,6 +8,7 @@ import PortConnectorList from '@/components/PortConnectorList';
 import PromptPreview from '@/components/PromptPreview';
 import ScenarioList from '@/components/ScenarioList';
 import { API_BASE } from '@/lib/api';
+import { getCategoryBySlug } from '@/lib/categories';
 import styles from '../toolkits/[slug]/page.module.css';
 
 export default function ViewPage() {
@@ -55,11 +56,27 @@ export default function ViewPage() {
   const prompt = toolkit.prompt || '';
   const ports = toolkit.ports || [];
   const scenarios = toolkit.scenarios || [];
+  const categoryInfo = getCategoryBySlug(toolkit.category);
+  const subcategoryInfo = toolkit.subcategory ? getCategoryBySlug(toolkit.subcategory) : undefined;
 
   return (
     <main className={styles.main}>
       <nav className={styles.breadcrumb}>
-        <Link href="/">首页</Link> › {toolkit.title}
+        <Link href="/">首页</Link>
+        <span className={styles.sep}>›</span>
+        {categoryInfo && (
+          <>
+            <Link href={`/categories/${categoryInfo.slug}`}>{categoryInfo.icon} {categoryInfo.name}</Link>
+            <span className={styles.sep}>›</span>
+          </>
+        )}
+        {subcategoryInfo && (
+          <>
+            <Link href={`/categories/${subcategoryInfo.slug}`}>{subcategoryInfo.icon} {subcategoryInfo.name}</Link>
+            <span className={styles.sep}>›</span>
+          </>
+        )}
+        {toolkit.title}
         {toolkit.source === 'generated' && <span style={{marginLeft:8,fontSize:'0.75rem',color:'var(--color-warning)'}}>🤖 AI 生成</span>}
       </nav>
 

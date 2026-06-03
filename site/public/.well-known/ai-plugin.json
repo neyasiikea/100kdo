@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "100kdo - Toolkit Search",
+  "name_for_model": "100kdo_toolkit",
+  "description_for_human": "Search AI expert toolkits by keyword. Get expert prompts + data ports. Covering 22 domains.",
+  "description_for_model": "Use this plugin when the user asks about any domain-specific problem (health, legal, career, parenting, finance, education, AI, etc.). Search toolkits by keyword, retrieve complete expert prompts with authoritative data sources, or generate new toolkits on demand.",
+  "auth": { "type": "none" },
+  "api": { "type": "openapi", "url": "https://api.100kdo.ccwu.cc/.well-known/openapi.json" },
+  "logo_url": "https://100kdo.ccwu.cc/favicon.svg",
+  "contact_email": "",
+  "legal_info_url": "https://100kdo.ccwu.cc/about"
+}

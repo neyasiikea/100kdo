@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "100kdo - 十万个干什么",
+  "name_for_model": "100kdo_toolkit_search",
+  "description_for_human": "AI领域专家工具包平台，覆盖22个领域。搜索、复制专家prompt，一键粘贴到AI秒变专家。",
+  "description_for_model": "Search expert toolkits across 22 domains. Each toolkit contains an expert prompt that transforms the AI into a domain specialist, plus authoritative data port connectors. API: GET /api/toolkits to list, GET /api/toolkits/:slug for details, POST /api/generate to create new toolkits.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://api.100kdo.ccwu.cc/mcp"
+  },
+  "logo_url": "https://100kdo.ccwu.cc/favicon.svg",
+  "contact_email": "",
+  "legal_info_url": "https://100kdo.ccwu.cc/about"
+}

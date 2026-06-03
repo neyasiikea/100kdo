@@ -24,7 +24,7 @@ export async function findAllToolkits(db: D1Database, category?: string): Promis
   if (category) {
     stmt = db.prepare('SELECT * FROM generated_toolkits WHERE category = ? OR subcategory = ? ORDER BY source DESC, usage_count DESC LIMIT 50').bind(category, category);
   } else {
-    stmt = db.prepare('SELECT * FROM generated_toolkits ORDER BY source DESC, usage_count DESC LIMIT 100');
+    stmt = db.prepare('SELECT * FROM generated_toolkits ORDER BY created_at DESC LIMIT 500');
   }
   const result = await stmt.all<ToolkitRow>();
   return (result.results ?? []).map(rowToToolkit);
@@ -39,4 +39,41 @@ export async function insertToolkit(db: D1Database, t: GeneratedToolkit): Promis
 
 export async function incrementUsage(db: D1Database, id: string): Promise<void> {
   await db.prepare('UPDATE generated_toolkits SET usage_count = usage_count + 1 WHERE id = ?').bind(id).run();
+}
+
+/** Admin: update an existing toolkit */
+export async function updateToolkit(db: D1Database, slug: string, updates: Partial<GeneratedToolkit>): Promise<boolean> {
+  const sets: string[] = [];
+  const vals: any[] = [];
+
+  if (updates.title !== undefined) { sets.push('title = ?'); vals.push(updates.title); }
+  if (updates.icon !== undefined) { sets.push('icon = ?'); vals.push(updates.icon); }
+  if (updates.category !== undefined) { sets.push('category = ?'); vals.push(updates.category); }
+  if (updates.subcategory !== undefined) { sets.push('subcategory = ?'); vals.push(updates.subcategory); }
+  if (updates.description !== undefined) { sets.push('description = ?'); vals.push(updates.description); }
+  if (updates.keywords !== undefined) { sets.push('keywords = ?'); vals.push(JSON.stringify(updates.keywords)); }
+  if (updates.prompt !== undefined) { sets.push('prompt = ?'); vals.push(updates.prompt); }
+  if (updates.scenarios !== undefined) { sets.push('scenarios = ?'); vals.push(JSON.stringify(updates.scenarios)); }
+  if (updates.ports !== undefined) { sets.push('ports = ?'); vals.push(JSON.stringify(updates.ports)); }
+  if (updates.source !== undefined) { sets.push('source = ?'); vals.push(updates.source); }
+  if (updates.review_status !== undefined) { sets.push('review_status = ?'); vals.push(updates.review_status); }
+
+  if (sets.length === 0) return false;
+
+  vals.push(slug);
+  const result = await db.prepare(`UPDATE generated_toolkits SET ${sets.join(', ')} WHERE slug = ?`).bind(...vals).run();
+  return result.meta?.changes > 0;
+}
+
+/** Admin: delete a toolkit by slug */
+export async function deleteToolkit(db: D1Database, slug: string): Promise<boolean> {
+  const result = await db.prepare('DELETE FROM generated_toolkits WHERE slug = ?').bind(slug).run();
+  return result.meta?.changes > 0;
+}
+
+export async function countToolkitsByCategory(db: D1Database): Promise<Record<string, number>> {
+  const result = await db.prepare('SELECT category, COUNT(*) as cnt FROM generated_toolkits GROUP BY category').all<{ category: string; cnt: number }>();
+  const map: Record<string, number> = {};
+  for (const r of result.results ?? []) { map[r.category] = r.cnt; }
+  return map;
 }

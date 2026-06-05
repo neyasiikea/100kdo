@@ -139,7 +139,7 @@ function formatToolkitForAI(t: GeneratedToolkit): string {
     lines.push('');
     lines.push('### 权威数据端口');
     for (const p of t.ports) {
-      lines.push(`- **${p.connector}**: ${p.name} (${p.type}) — ${p.url}`);
+      lines.push(`- **${p.name}** (${p.type}) — ${p.url}${p.description ? ' | ' + p.description : ''}`);
     }
   }
 

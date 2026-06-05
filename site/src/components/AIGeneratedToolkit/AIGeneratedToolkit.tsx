@@ -54,7 +54,7 @@ function generateClipboardText(
     lines.push('可使用的权威数据源：');
     for (const port of toolkit.ports) {
       lines.push(
-        `- ${port.connector}：${port.name} (${PORT_TYPE_LABELS[port.type] ?? port.type})`
+        `- ${port.name} (${PORT_TYPE_LABELS[port.type] ?? port.type}): ${port.url}${port.description ? ' — ' + port.description : ''}`
       );
     }
     lines.push('');
@@ -162,7 +162,7 @@ export default function AIGeneratedToolkit({
                       {status.label}
                     </span>
                     <span className={styles.portConnector}>
-                      {port.connector}
+                      {port.name}
                     </span>
                   </div>
                   <div className={styles.portBody}>
@@ -177,14 +177,16 @@ export default function AIGeneratedToolkit({
                         {p}
                       </span>
                     ))}
-                    <a
-                      href={port.connectorUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.portUrl}
-                    >
-                      {port.connectorUrl}
-                    </a>
+                    {port.url && (
+                      <a
+                        href={port.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.portUrl}
+                      >
+                        {port.url}
+                      </a>
+                    )}
                   </div>
                 </div>
               );

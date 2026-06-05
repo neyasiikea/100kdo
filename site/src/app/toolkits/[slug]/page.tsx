@@ -44,7 +44,7 @@ export default async function ToolkitPage({ params }: { params: { slug: string }
                 '@type': 'Dataset',
                 name: p.name,
                 url: p.url,
-                description: `端口类型: ${p.type}, 连接器: ${p.connector}, 状态: ${p.status}`,
+                description: `端口类型: ${p.type}, 状态: ${p.status}${p.description ? ', ' + p.description : ''}`,
                 creator: { '@type': 'Organization', name: p.name },
               })),
               // Scenarios as HowTo
@@ -73,7 +73,7 @@ export default async function ToolkitPage({ params }: { params: { slug: string }
                 name: p.name,
                 url: p.url,
                 type: p.type,
-                connector: p.connector,
+                description: p.description,
               })),
               scenarios: toolkit.scenarios,
             }),

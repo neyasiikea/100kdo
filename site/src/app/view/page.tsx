@@ -9,6 +9,7 @@ import PromptPreview from '@/components/PromptPreview';
 import ScenarioList from '@/components/ScenarioList';
 import { API_BASE } from '@/lib/api';
 import { getCategoryBySlug } from '@/lib/categories';
+import { generateClipboardText, generatePromptOnlyText } from '@/lib/clipboard';
 import styles from '../toolkits/[slug]/page.module.css';
 
 export default function ViewPage() {
@@ -56,6 +57,9 @@ export default function ViewPage() {
   const prompt = toolkit.prompt || '';
   const ports = toolkit.ports || [];
   const scenarios = toolkit.scenarios || [];
+  const followUpChain = Array.isArray(toolkit.follow_up_chain) ? toolkit.follow_up_chain : [];
+  const clipboardText = generateClipboardText(toolkit);
+  const promptOnlyText = generatePromptOnlyText(toolkit);
   const categoryInfo = getCategoryBySlug(toolkit.category);
   const subcategoryInfo = toolkit.subcategory ? getCategoryBySlug(toolkit.subcategory) : undefined;
 
@@ -88,12 +92,72 @@ export default function ViewPage() {
 
       <section className={styles.deliveryBox}>
         <h2 className={styles.deliveryTitle}>🚀 一键获取专家工具包</h2>
-        <CopyButton text={`【${toolkit.icon||'🤖'} ${toolkit.title}】\n\n${prompt}\n\n---\n由 100kdo.ccwu.cc 提供`} label="📋 复制完整工具包" className={styles.copyBtn} />
-        <p className={styles.deliveryHint}>复制后粘贴到任意 AI 对话中即可使用</p>
+        <div className={styles.copyGroup}>
+          <CopyButton text={clipboardText} label="📋 复制完整工具包" className={styles.copyBtn} />
+          <CopyButton text={promptOnlyText} label="📋 复制精简版（仅Prompt）" className={styles.copyBtnSecondary} />
+        </div>
+        <p className={styles.deliveryHint}>复制后粘贴到 ChatGPT/豆包/Kimi 等任意 AI 对话中即可使用</p>
         <PlatformButtons promptText={prompt} />
       </section>
 
       <section className={styles.section}><PromptPreview prompt={prompt} /></section>
+
+      {/* Search guidance */}
+      {toolkit.search_guidance && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>🔍 搜索指导</h2>
+          <div className={styles.enhancedBlock}>
+            <p>{toolkit.search_guidance}</p>
+          </div>
+        </section>
+      )}
+
+      {/* Response template */}
+      {toolkit.response_template && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>📝 回答格式</h2>
+          <div className={styles.enhancedBlock}>
+            <pre className={styles.enhancedPre}>{toolkit.response_template}</pre>
+          </div>
+        </section>
+      )}
+
+      {/* Follow-up chain */}
+      {followUpChain.length > 0 && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>💬 追问链</h2>
+          <p className={styles.sectionHint}>AI 会在回答后主动按以下顺序追问</p>
+          <div className={styles.followUpList}>
+            {followUpChain.map((q: string, i: number) => (
+              <div key={i} className={styles.followUpItem}>
+                <span className={styles.followUpNum}>{i + 1}</span>
+                <span>{q}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Example dialogue */}
+      {toolkit.example_dialogue && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>💡 示例对话</h2>
+          <details className={styles.exampleDetails}>
+            <summary className={styles.exampleSummary}>点击展开查看示例</summary>
+            <pre className={styles.enhancedPre}>{toolkit.example_dialogue}</pre>
+          </details>
+        </section>
+      )}
+
+      {/* Disclaimer */}
+      {toolkit.disclaimer && (
+        <section className={styles.section}>
+          <div className={styles.disclaimerBox}>
+            <strong>⚠️ 重要提醒</strong>
+            <p>{toolkit.disclaimer}</p>
+          </div>
+        </section>
+      )}
 
       {ports.length > 0 && (
         <section className={styles.section}>

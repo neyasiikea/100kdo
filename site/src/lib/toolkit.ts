@@ -53,6 +53,11 @@ export async function getToolkitBySlug(slug: string): Promise<Toolkit | null> {
     prompt: String(t.prompt ?? ''),
     scenarios: safeArr(t.scenarios) as any,
     ports: safeArr(t.ports) as any,
+    response_template: t.response_template || undefined,
+    follow_up_chain: safeArr(t.follow_up_chain) as any,
+    disclaimer: t.disclaimer || undefined,
+    example_dialogue: t.example_dialogue || undefined,
+    search_guidance: t.search_guidance || undefined,
   };
 }
 

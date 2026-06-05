@@ -89,6 +89,11 @@ app.post('/api/migrate/import', async (c) => {
     prompt: body.prompt || '',
     scenarios: body.scenarios || [],
     ports: body.ports || [],
+    response_template: body.response_template || undefined,
+    follow_up_chain: body.follow_up_chain || undefined,
+    disclaimer: body.disclaimer || undefined,
+    example_dialogue: body.example_dialogue || undefined,
+    search_guidance: body.search_guidance || undefined,
     source: body.source || 'curated',
     review_status: body.review_status || 'reviewed',
     created_at: now,
@@ -173,6 +178,11 @@ app.post('/api/admin/toolkits', async (c) => {
     prompt: body.prompt,
     scenarios: body.scenarios || [],
     ports: body.ports || [],
+    response_template: body.response_template || undefined,
+    follow_up_chain: body.follow_up_chain || undefined,
+    disclaimer: body.disclaimer || undefined,
+    example_dialogue: body.example_dialogue || undefined,
+    search_guidance: body.search_guidance || undefined,
     source: 'curated',
     review_status: 'reviewed',
     created_at: now,
@@ -181,6 +191,31 @@ app.post('/api/admin/toolkits', async (c) => {
 
   await insertToolkit(c.env.DB, toolkit);
   return c.json({ success: true, slug });
+});
+
+// ──────── Temporary migration endpoint ────────
+app.post('/api/admin/migrate', async (c) => {
+  if (!adminAuth(c)) return c.json({ error: 'Unauthorized' }, 401);
+
+  const migrations = [
+    `ALTER TABLE generated_toolkits ADD COLUMN response_template TEXT`,
+    `ALTER TABLE generated_toolkits ADD COLUMN follow_up_chain TEXT`,
+    `ALTER TABLE generated_toolkits ADD COLUMN disclaimer TEXT`,
+    `ALTER TABLE generated_toolkits ADD COLUMN example_dialogue TEXT`,
+    `ALTER TABLE generated_toolkits ADD COLUMN search_guidance TEXT`,
+  ];
+
+  const results: string[] = [];
+  for (const sql of migrations) {
+    try {
+      await c.env.DB.prepare(sql).run();
+      results.push(`OK: ${sql.slice(0, 60)}...`);
+    } catch (e: any) {
+      results.push(`SKIP (may already exist): ${e.message.slice(0, 80)}`);
+    }
+  }
+
+  return c.json({ success: true, results });
 });
 
 // MCP Server — GET returns server info, POST handles JSON-RPC
@@ -226,6 +261,11 @@ app.get('/api/llms', async (c) => {
     md += '**分类**: ' + t.category + (t.subcategory ? ' > ' + t.subcategory : '') + '\n';
     md += '**关键词**: ' + (t.keywords || []).join('、') + '\n\n';
     md += '#### 专家 Prompt\n\n' + (t.prompt || '') + '\n\n';
+    if (t.search_guidance) { md += '#### 搜索指导\n\n' + t.search_guidance + '\n\n'; }
+    if (t.response_template) { md += '#### 回答模板\n\n' + t.response_template + '\n\n'; }
+    if (t.follow_up_chain?.length) { md += '#### 追问链\n\n' + t.follow_up_chain.map((q: string) => '- ' + q).join('\n') + '\n\n'; }
+    if (t.example_dialogue) { md += '#### 示例对话\n\n' + t.example_dialogue + '\n\n'; }
+    if (t.disclaimer) { md += '#### 重要提醒\n\n' + t.disclaimer + '\n\n'; }
 
     const scenarios = t.scenarios || [];
     if (scenarios.length > 0) {
@@ -238,8 +278,9 @@ app.get('/api/llms', async (c) => {
     if (ports.length > 0) {
       md += '#### 权威数据端口\n\n';
       for (const p of ports) {
-        md += '- **' + p.connector + '** → ' + p.name + ' (' + p.type + ')\n';
+        md += '- **' + p.name + '** (' + p.type + ')\n';
         md += '  信息源: ' + p.url + ' | 状态: ' + p.status + '\n';
+        if (p.description) { md += '  说明: ' + p.description + '\n'; }
       }
       md += '\n';
     }

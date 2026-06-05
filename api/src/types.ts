@@ -14,6 +14,11 @@ export interface GeneratedToolkit {
   prompt: string;
   scenarios: GeneratedScenario[];
   ports: GeneratedPort[];
+  response_template?: string;
+  follow_up_chain?: string[];
+  disclaimer?: string;
+  example_dialogue?: string;
+  search_guidance?: string;
   source?: string;
   review_status?: string;
   created_at: string;
@@ -31,10 +36,10 @@ export interface GeneratedPort {
   name: string;
   url: string;
   type: string;
-  connector: string;
-  connectorUrl: string;
+  description?: string;
   status: 'verified' | 'unverified' | 'community';
   platforms: string[];
+  // NOTE: connector 和 connectorUrl 已废弃——对消费者 AI 无实际价值
 }
 
 /** Raw AI response before parsing */
@@ -47,6 +52,11 @@ export interface AIResponse {
   prompt: string;
   scenarios: GeneratedScenario[];
   ports: GeneratedPort[];
+  response_template?: string;
+  follow_up_chain?: string[];
+  disclaimer?: string;
+  example_dialogue?: string;
+  search_guidance?: string;
 }
 
 /** D1 row format (JSON strings for complex fields) */
@@ -64,6 +74,11 @@ export interface ToolkitRow {
   prompt: string;
   scenarios: string;
   ports: string;
+  response_template?: string;
+  follow_up_chain?: string;
+  disclaimer?: string;
+  example_dialogue?: string;
+  search_guidance?: string;
   source?: string;
   review_status?: string;
   created_at: string;

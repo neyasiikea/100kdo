@@ -83,11 +83,136 @@
   padding: 0.7rem 1.8rem;
 }
 
+.copyBtnSecondary {
+  font-size: 0.9rem;
+  padding: 0.6rem 1.4rem;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.copyBtnSecondary:hover {
+  background: var(--color-border);
+}
+
+.copyGroup {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
 .deliveryHint {
   margin-top: 0.75rem;
   font-size: 0.85rem;
   color: var(--color-text-secondary);
   opacity: 0.8;
+}
+
+/* Enhanced blocks */
+.enhancedBlock {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.enhancedPre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--color-text-primary);
+}
+
+.sectionHint {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+/* Follow-up chain */
+.followUpList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.followUpItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.followUpNum {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Example dialogue */
+.exampleDetails {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.exampleSummary {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+.exampleDetails[open] .exampleSummary {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.exampleDetails .enhancedPre {
+  padding: 1rem;
+}
+
+/* Disclaimer */
+.disclaimerBox {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  color: #991b1b;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.disclaimerBox strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem;
+}
+
+.disclaimerBox p {
+  margin: 0;
 }
 
 /* Sections */

@@ -18,11 +18,11 @@ export interface PortConnector {
   name: string;            // Display name of the authority source
   url: string;             // URL to the data source
   type: PortType;
-  connector: string;       // Connector identifier (e.g., "who-growth-mcp")
-  connectorUrl: string;    // Link to install/get the connector
+  description?: string;    // Description of what this source provides
   status: PortStatus;
   platforms: string[];     // Platform slugs this connector works on
   contributor?: string;
+  // NOTE: connector 和 connectorUrl 已废弃——对消费者 AI 无实际价值
 }
 
 /** A scenario within a toolkit — maps user intent to ports */
@@ -46,6 +46,11 @@ export interface Toolkit {
   prompt: string;          // Full expert prompt text
   scenarios: Scenario[];
   ports: PortConnector[];
+  response_template?: string;
+  follow_up_chain?: string[];
+  disclaimer?: string;
+  example_dialogue?: string;
+  search_guidance?: string;
 }
 
 /** Toolkit metadata only (for listing pages, excludes heavy fields) */

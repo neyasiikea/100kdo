@@ -48,6 +48,13 @@
   color: var(--color-text-primary);
 }
 
+.portDescription {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.78rem;
+  color: var(--color-text-tertiary);
+  line-height: 1.4;
+}
+
 .body {
   display: flex;
   align-items: center;

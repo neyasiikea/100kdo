@@ -38,6 +38,9 @@ export default function HomePage() {
         <p className={styles.hint}>
           试试搜索：孩子发烧怎么办 · 被辞退怎么维权 · 怎么选重疾险
         </p>
+        <p className={styles.tip}>
+          💡 找到工具包 → 复制 → 粘贴到 ChatGPT / 豆包 / Kimi 即可使用
+        </p>
       </section>
 
       {/* Categories */}

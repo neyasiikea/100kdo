@@ -15,6 +15,8 @@ export default function AdminToolkitNewPage() {
     title: '', icon: '🗂️', category: 'digital', subcategory: '',
     description: '', keywords: '', prompt: '',
     scenarios: '[]', ports: '[]',
+    search_guidance: '', response_template: '', follow_up_chain: '',
+    disclaimer: '', example_dialogue: '',
   });
 
   useEffect(() => { document.title = '新建工具包 | 100kdo'; }, []);
@@ -39,6 +41,11 @@ export default function AdminToolkitNewPage() {
         prompt: form.prompt,
         scenarios: safeJson(form.scenarios),
         ports: safeJson(form.ports),
+        search_guidance: form.search_guidance || undefined,
+        response_template: form.response_template || undefined,
+        follow_up_chain: form.follow_up_chain.split('\n').map((l: string) => l.trim()).filter(Boolean),
+        disclaimer: form.disclaimer || undefined,
+        example_dialogue: form.example_dialogue || undefined,
       }),
     });
     if (res.ok) {
@@ -132,7 +139,37 @@ function ToolkitForm({ form, setForm, categories, subcats, onCategoryChange }: {
         <label className={styles.label}>端口 (JSON)</label>
         <textarea className={styles.textarea} style={{ minHeight: 120 }} value={form.ports}
           onChange={e => setForm({...form, ports: e.target.value})}
-          placeholder='[{"id":"xxx","name":"...","url":"...","type":"static-data","connector":"...","connectorUrl":"...","status":"verified","platforms":["deepseek"]}]' />
+          placeholder='[{"id":"xxx","name":"...","url":"...","type":"static-data","description":"可查询的内容","status":"verified","platforms":["web"]}]' />
+      </div>
+      <div className={styles.field}>
+        <label className={styles.label}>搜索指导</label>
+        <textarea className={styles.textarea} style={{ minHeight: 60 }} value={form.search_guidance}
+          onChange={e => setForm({...form, search_guidance: e.target.value})}
+          placeholder="请联网搜索最新的相关指南和权威来源" />
+      </div>
+      <div className={styles.field}>
+        <label className={styles.label}>回答模板</label>
+        <textarea className={styles.textarea} style={{ minHeight: 80 }} value={form.response_template}
+          onChange={e => setForm({...form, response_template: e.target.value})}
+          placeholder={`### 核心结论\n（1-2句话总结）\n\n### 详细分析\n- 要点1 + 来源引用\n- 要点2 + 来源引用\n\n### 行动建议\n（具体可操作的建议）`} />
+      </div>
+      <div className={styles.field}>
+        <label className={styles.label}>追问链（每行一条追问）</label>
+        <textarea className={styles.textarea} style={{ minHeight: 60 }} value={form.follow_up_chain}
+          onChange={e => setForm({...form, follow_up_chain: e.target.value})}
+          placeholder={form.follow_up_chain} />
+      </div>
+      <div className={styles.field}>
+        <label className={styles.label}>示例对话</label>
+        <textarea className={styles.textarea} style={{ minHeight: 80 }} value={form.example_dialogue}
+          onChange={e => setForm({...form, example_dialogue: e.target.value})}
+          placeholder={`用户: "孩子3岁，发烧38.5度，精神状态还可以"\nAI: [先问...] → [给出建议...] → [追问...]`} />
+      </div>
+      <div className={styles.field}>
+        <label className={styles.label}>安全声明</label>
+        <textarea className={styles.textarea} style={{ minHeight: 60 }} value={form.disclaimer}
+          onChange={e => setForm({...form, disclaimer: e.target.value})}
+          placeholder="⚠️ 本建议仅供参考，不能替代专业医生的面诊。如症状持续或加重，请立即就医。" />
       </div>
     </div>
   );

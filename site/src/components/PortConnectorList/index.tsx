@@ -30,16 +30,28 @@ export default function PortConnectorList({ ports }: PortConnectorListProps) {
           label: port.status,
           className: 'statusCommunity',
         };
+        const hasRealSourceUrl = port.url && port.url.startsWith('http');
         return (
           <div key={port.id} className={styles.port}>
             <div className={styles.header}>
               <span className={`${styles.status} ${styles[status.className]}`}>
                 {status.label}
               </span>
-              <span className={styles.connectorName}>{port.connector}</span>
+              <span className={styles.connectorName}>{port.name}</span>
             </div>
+            {port.description && (
+              <p className={styles.portDescription}>{port.description}</p>
+            )}
             <div className={styles.body}>
-              <span className={styles.sourceName}>{port.name}</span>
+              <span className={styles.sourceName}>
+                {hasRealSourceUrl ? (
+                  <a href={port.url} target="_blank" rel="noopener noreferrer">
+                    {port.url}
+                  </a>
+                ) : (
+                  port.url || '无链接'
+                )}
+              </span>
               <span className={styles.typeBadge}>
                 {TYPE_LABELS[port.type] ?? port.type}
               </span>
@@ -52,14 +64,6 @@ export default function PortConnectorList({ ports }: PortConnectorListProps) {
                   </span>
                 ))}
               </span>
-              <a
-                href={port.connectorUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.connectorUrl}
-              >
-                {port.connectorUrl}
-              </a>
             </div>
           </div>
         );

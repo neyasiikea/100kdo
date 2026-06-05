@@ -6,7 +6,13 @@ function safeParse(raw: string): any[] {
 }
 
 function rowToToolkit(row: ToolkitRow): GeneratedToolkit {
-  return { ...row, keywords: safeParse(row.keywords), scenarios: safeParse(row.scenarios), ports: safeParse(row.ports) };
+  return {
+    ...row,
+    keywords: safeParse(row.keywords),
+    scenarios: safeParse(row.scenarios),
+    ports: safeParse(row.ports),
+    follow_up_chain: safeParse(row.follow_up_chain ?? ''),
+  };
 }
 
 export async function findByQueryHash(db: D1Database, queryHash: string): Promise<GeneratedToolkit | null> {
@@ -32,9 +38,9 @@ export async function findAllToolkits(db: D1Database, category?: string): Promis
 
 export async function insertToolkit(db: D1Database, t: GeneratedToolkit): Promise<void> {
   await db.prepare(
-    `INSERT OR REPLACE INTO generated_toolkits (id, query_hash, query, slug, title, icon, category, subcategory, description, keywords, prompt, scenarios, ports, source, review_status, created_at, usage_count)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-  ).bind(t.id, t.query_hash ?? '', t.query ?? '', t.slug, t.title, t.icon, t.category, t.subcategory ?? '', t.description, JSON.stringify(t.keywords), t.prompt, JSON.stringify(t.scenarios), JSON.stringify(t.ports), t.source ?? 'generated', t.review_status ?? 'auto', t.created_at, t.usage_count ?? 1).run();
+    `INSERT OR REPLACE INTO generated_toolkits (id, query_hash, query, slug, title, icon, category, subcategory, description, keywords, prompt, scenarios, ports, response_template, follow_up_chain, disclaimer, example_dialogue, search_guidance, source, review_status, created_at, usage_count)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+  ).bind(t.id, t.query_hash ?? '', t.query ?? '', t.slug, t.title, t.icon, t.category, t.subcategory ?? '', t.description, JSON.stringify(t.keywords), t.prompt, JSON.stringify(t.scenarios), JSON.stringify(t.ports), t.response_template ?? '', JSON.stringify(t.follow_up_chain ?? []), t.disclaimer ?? '', t.example_dialogue ?? '', t.search_guidance ?? '', t.source ?? 'generated', t.review_status ?? 'auto', t.created_at, t.usage_count ?? 1).run();
 }
 
 export async function incrementUsage(db: D1Database, id: string): Promise<void> {
@@ -57,6 +63,11 @@ export async function updateToolkit(db: D1Database, slug: string, updates: Parti
   if (updates.ports !== undefined) { sets.push('ports = ?'); vals.push(JSON.stringify(updates.ports)); }
   if (updates.source !== undefined) { sets.push('source = ?'); vals.push(updates.source); }
   if (updates.review_status !== undefined) { sets.push('review_status = ?'); vals.push(updates.review_status); }
+  if (updates.response_template !== undefined) { sets.push('response_template = ?'); vals.push(updates.response_template); }
+  if (updates.follow_up_chain !== undefined) { sets.push('follow_up_chain = ?'); vals.push(JSON.stringify(updates.follow_up_chain)); }
+  if (updates.disclaimer !== undefined) { sets.push('disclaimer = ?'); vals.push(updates.disclaimer); }
+  if (updates.example_dialogue !== undefined) { sets.push('example_dialogue = ?'); vals.push(updates.example_dialogue); }
+  if (updates.search_guidance !== undefined) { sets.push('search_guidance = ?'); vals.push(updates.search_guidance); }
 
   if (sets.length === 0) return false;
 

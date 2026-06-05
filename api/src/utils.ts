@@ -17,9 +17,9 @@ export function generateId(): string {
 type Rule = [string, string, string[]];
 
 const rules: Rule[] = [
-  ['health','internal',['感冒','发烧','咳嗽','头痛','胃','腹','拉肚子','便秘','过敏','哮喘','心脏','血压','贫血','甲状腺','肾炎','肺炎','支气管','扁桃体','鼻炎','咽炎','头晕','胸闷','心慌']],
+  ['health','internal',['感冒','发烧','退烧','咳嗽','头痛','胃','腹','拉肚子','便秘','过敏','哮喘','心脏','血压','贫血','甲状腺','肾炎','肺炎','支气管','扁桃体','鼻炎','咽炎','头晕','胸闷','心慌','孩子生病','儿童生病','小儿']],
   ['health','chronic',['高血压','糖尿病','痛风','冠心病','脂肪肝','乙肝','尿酸','血糖','血脂','胆固醇','胰岛素','透析','支架','脑梗','中风','慢病']],
-  ['health','pharmacy',['吃药','服药','药物','药片','胶囊','处方','OTC','抗生素','消炎药','止痛药','降压药','降糖','副作用','禁忌','说明书','中药','西药','保健品']],
+  ['health','pharmacy',['吃药','服药','药物','药片','胶囊','处方','OTC','抗生素','消炎药','止痛药','降压药','退烧药','降糖','副作用','禁忌','说明书','中药','西药','保健品']],
   ['health','fitness',['减肥','健身','跑步','游泳','瑜伽','减脂','增肌','运动','体脂','塑形','力量','有氧','拉伸','私教','腹肌','翘臀','深蹲','HIIT','Tabata']],
   ['mental','emotion',['焦虑','抑郁','情绪','难过','伤心','绝望','崩溃','恐惧','害怕','强迫','暴躁','易怒','低落','提不起劲','没精神','PTSD','创伤']],
   ['mental','sleep',['失眠','睡不着','早醒','多梦','噩梦','打鼾','睡眠呼吸','作息','熬夜','嗜睡','褪黑素','安眠药']],
@@ -41,14 +41,14 @@ const rules: Rule[] = [
   ['ai','ai-writing',['AI写作','AI写','AI生成文章','小说','文案','公众号','小红书文案','润色','改写','翻译','摘要','总结','grammarly']],
   ['ai','ai-art',['AI绘图','AI绘画','AI画','AI图片','AI视频','AI图','AI视频','Midjourney','DALL-E','Stable Diffusion','可灵','Sora','即梦','Runway']],
   ['ai','ai-tools',['prompt','提示词','RAG','知识库','工作流','自动化','AI工具','GPT','DeepSeek','Kimi','豆包','AI搜索','perplexity']],
-  ['legal','labor',['劳动','辞退','开除','加班费','补偿','工伤','合同','竞业','N+1','2N','仲裁','拖欠工资','五险一金','裁员','劝退']],
+  ['legal','labor',['劳动','辞退','开除','加班费','补偿','工伤','合同','竞业','N+1','2N','仲裁','拖欠工资','五险一金','裁员','劝退','降薪','违法','解雇','薪酬','年假','请假','调岗']],
   ['legal','consumer',['消费','退货','退款','假货','欺诈','投诉','差评','二手','闲鱼','淘宝','京东','拼多多','曝光','315','纠纷','维权']],
   ['legal','marriage-law',['离婚','财产分割','抚养权','婚前','婚后','房产证','加名','继承','遗嘱','彩礼','嫁妆','同居','分居']],
   ['legal','traffic',['车祸','撞车','交强险','三者险','追尾','扣分','事故认定','伤残鉴定','逃逸','酒驾','碰瓷']],
   ['finance','insurance',['保险','重疾','医疗险','车险','意外险','寿险','理赔','退保','保费','保额','免赔额','等待期']],
   ['finance','tax',['税','个税','报税','汇算','专项扣除','退税','补税','增值税','年终奖','劳务报酬','发票']],
   ['finance','loan',['贷款','房贷','车贷','消费贷','信用贷','公积金贷款','LPR','利率','首付','还款','月供','提前还款']],
-  ['finance','invest',['基金','股票','债券','理财','投资','定投','指数','ETF','收益率','风险','A股','港股','美股','仓位','止损']],
+  ['finance','invest',['基金','股票','债券','理财','投资','定投','指数','ETF','收益率','风险','A股','港股','美股','仓位','止损','黄金','金价','贵金属','大盘','行情','涨跌','期货','外汇','交易','抄底']],
   ['education','study',['学习','记忆','笔记','复习','考试','背书','效率','方法','思维导图','番茄钟','费曼','SQ3R']],
   ['education','exam',['高考','考研','考公','考证','四级','六级','雅思','托福','GMAT','GRE','SAT','公务员','教资','法考','司法考试','CPA']],
   ['education','abroad',['留学','出国','选校','文书','推荐信','PS','CV','套磁','offer','全奖','自费','exchange']],
@@ -57,15 +57,15 @@ const rules: Rule[] = [
   ['digital','app-guide',['App','app','APP','软件','应用','下载什么','用什么软件','效率工具','笔记软件','日历','提醒','密码管理']],
   ['digital','smart-home',['智能家居','米家','HomeKit','天猫精灵','小爱','智能灯','智能门锁','扫地机器人','摄像头','窗帘电机']],
   ['digital','repair',['坏了','故障','不亮了','进水','碎屏','卡顿','开不了机','蓝屏','黑屏','重启','重置','刷机']],
-  ['home','renovation',['装修','毛坯','新房','硬装','软装','水电改造','瓷砖','地板','油漆','涂料','甲醛','验收','监理','工长']],
-  ['home','storage',['收纳','整理','断舍离','袜子','衣柜','厨房收纳','冰箱收纳','收纳盒','空间改造','极简','囤货']],
+  ['home','renovation',['装修','毛坯','新房','硬装','软装','水电改造','瓷砖','地板','油漆','涂料','甲醛','验收','监理','工长','二手房','过户','租房','出租']],
+  ['home','storage',['收纳','整理','断舍离','袜子','衣柜','厨房收纳','冰箱收纳','收纳盒','空间改造','极简','囤货','搬家']],
   ['home','appliance',['空调','冰箱','洗衣机','电视','洗碗机','扫地机','烘干机','净水器','热水器','抽油烟机','烤箱','微波炉','空气炸锅']],
   ['home','daily-tips',['清洁','除味','去油','堵','通下水','防潮','除霉','省电','节水','洗衣服','熨烫','补衣服','换锁']],
   ['cooking','recipe',['做菜','菜谱','做饭','家常菜','炒菜','红烧','糖醋','鱼香','宫保','水煮','干锅','蒸鱼']],
   ['cooking','baking',['烘焙','面包','蛋糕','饼干','蛋挞','吐司','披萨','面团','发酵','烤箱','厨师机','奶油','裱花']],
   ['cooking','nutrition',['营养','减肥餐','减脂餐','增肌餐','热量','卡路里','碳水','蛋白质','膳食','轻食','低脂','低糖','低盐']],
   ['cooking','world-food',['日料','韩餐','西餐','牛排','意面','pasta','pizza','寿司','刺身','冬阴功','咖喱','越南','泰国','taco']],
-  ['travel','trip-plan',['旅游','旅行','攻略','自由行','跟团','定制游','穷游','自驾','房车','背包客','环游','蜜月旅行']],
+  ['travel','trip-plan',['旅游','旅行','攻略','自由行','跟团','定制游','穷游','自驾','房车','背包客','环游','蜜月旅行','跨境','出境游']],
   ['travel','visa-flight',['签证','机票','便宜机票','航班','特价','里程','延误','取消','值机','选座','行李']],
   ['travel','hotel',['酒店','住宿','民宿','青旅','airbnb','booking','万豪','希尔顿','IHG','积分房','房型','checkin']],
   ['travel','local',['本地','周边','一日游','周末','公园','博物馆','打卡','网红','小众','隐藏','必去','必吃']],
@@ -107,6 +107,17 @@ const rules: Rule[] = [
   ['safety','disaster',['地震','火灾','台风','洪水','暴雨','泥石流','紧急避难','逃生','自救','应急包','储备','警报']],
 ];
 
+/** Known valid categories — anything not in this list is rejected */
+const VALID_CATEGORIES = new Set([
+  'health','mental','parenting','career','professional','ai',
+  'legal','finance','education','digital','home','cooking',
+  'travel','shopping','government','relationships','pets',
+  'entertainment','beauty','elderly','startup','safety',
+]);
+
+/** Confidence threshold — scores below this return "待定" */
+const MIN_CONFIDENCE = 3;
+
 export function inferCategory(query: string): { category: string; subcategory: string } {
   const q = query.toLowerCase();
   const scores: Record<string, number> = {};
@@ -114,20 +125,42 @@ export function inferCategory(query: string): { category: string; subcategory: s
   for (const [cat, subcat, keywords] of rules) {
     let score = 0;
     for (const kw of keywords) {
-      if (q.includes(kw)) score += kw.length >= 3 ? 3 : 1;
-      if (kw.length >= 4 && q.includes(kw.slice(0,2))) score += 1;
+      const kwLower = kw.toLowerCase();
+      if (q.includes(kwLower)) {
+        score += kw.length >= 3 ? 3 : 1;
+      }
     }
     if (score > 0) scores[`${cat}:${subcat}`] = score;
   }
 
+  // Find best match
   let best = '', bestScore = 0;
+  const ties: string[] = [];
   for (const [k, s] of Object.entries(scores)) {
-    if (s > bestScore) { best = k; bestScore = s; }
+    if (s > bestScore) { best = k; bestScore = s; ties.length = 0; ties.push(k); }
+    else if (s === bestScore && bestScore > 0) { ties.push(k); }
   }
 
-  if (best) {
-    const [cat, subcat] = best.split(':');
-    return { category: cat, subcategory: subcat };
-  }
-  return { category: 'digital', subcategory: '' };
+  // Rule 1: No match at all → 待定
+  if (!best || bestScore === 0) return { category: '待定', subcategory: '' };
+
+  // Rule 2: Score too low (weak signal) → 待定
+  if (bestScore < MIN_CONFIDENCE) return { category: '待定', subcategory: '' };
+
+  // Rule 3: Ambiguous — multiple categories tied at same top score → 待定
+  const tiedCategories = new Set(ties.map(t => t.split(':')[0]));
+  if (tiedCategories.size > 1) return { category: '待定', subcategory: '' };
+
+  // Confident single match
+  const [cat, subcat] = best.split(':');
+  return { category: cat, subcategory: subcat };
+}
+
+/** Validate and normalize an AI-provided category string.
+ *  Returns the category if valid, empty string otherwise. */
+export function validateCategory(raw: string | undefined): string {
+  if (!raw) return '';
+  const parts = raw.trim().toLowerCase().split('/');
+  const cat = parts[0]?.trim();
+  return cat && VALID_CATEGORIES.has(cat) ? cat : '';
 }

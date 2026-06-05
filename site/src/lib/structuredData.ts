@@ -31,7 +31,7 @@ export function generateToolkitJsonLd(toolkit: Toolkit): object {
       '@type': 'DataFeed',
       name: p.name,
       url: p.url,
-      description: `端口类型: ${p.type}, 连接器: ${p.connector}, 状态: ${p.status}`,
+      description: `端口类型: ${p.type}, 状态: ${p.status}${p.description ? ', 说明: ' + p.description : ''}`,
     })),
   };
 }
